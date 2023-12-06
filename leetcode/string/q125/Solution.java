@@ -1,6 +1,20 @@
 package leetcode.string.q125;
 
+import java.util.Scanner;
+
 public class Solution {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.nextLine();
+
+        sc.close();
+
+        boolean palindrome = isPalindrome(s);
+
+        System.out.println(palindrome);
+    }
+
     public static boolean isPalindrome(String s) {
         if (s.isBlank()) {
             return true;
