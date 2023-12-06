@@ -1,6 +1,4 @@
-package leetcode.string.Q125;
-
-import java.util.Scanner;
+package leetcode.string.q125;
 
 public class Solution {
     public static boolean isPalindrome(String s) {
