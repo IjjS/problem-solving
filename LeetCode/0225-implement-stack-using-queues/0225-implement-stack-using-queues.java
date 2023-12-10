@@ -1,42 +1,40 @@
 class MyStack {
 
-    Queue<Integer> inbox = new LinkedList<>();
-    Queue<Integer> outbox = new LinkedList<>();
+    Queue<Integer> main;
+    Queue<Integer> temp;
 
     public MyStack() {
+        main = new LinkedList<>();
+        temp = new LinkedList<>();
     }
     
     public void push(int x) {
-        inbox.add(x);
+        temp.add(x);
+        pileUpStack();
+        swap();
     }
     
     public int pop() {
-        if (inbox.size() < 2) return inbox.poll();
-        migrate();
-        return outbox.poll();
+        return main.poll();
     }
     
     public int top() {
-        if (inbox.size() < 2) return inbox.peek();
-        migrate();
-        int top = outbox.poll();
-        inbox.add(top);
-        return top;
+        return main.peek();
     }
     
     public boolean empty() {
-        return inbox.isEmpty();
+        return main.isEmpty();
+    }
+    
+    private void pileUpStack() {
+        while (!main.isEmpty()) {
+            temp.add(main.poll());
+        }
     }
 
-    private void migrate() {
-        int size = inbox.size();
-
-        for (int i = 0; i < size; i++) {
-            outbox.add(inbox.poll());
-        }
-
-        for (int i = 0; i < size - 1; i++) {
-            inbox.add(outbox.poll());
+    private void swap() {
+        while (!temp.isEmpty()) {
+            main.add(temp.poll());
         }
     }
 }
