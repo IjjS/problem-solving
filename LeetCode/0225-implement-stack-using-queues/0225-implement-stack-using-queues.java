@@ -1,11 +1,9 @@
 class MyStack {
 
-    Queue<Integer> inbox;
-    Queue<Integer> outbox;
+    Queue<Integer> inbox = new LinkedList<>();
+    Queue<Integer> outbox = new LinkedList<>();
 
     public MyStack() {
-        inbox = new LinkedList<>();
-        outbox = new LinkedList<>();
     }
     
     public void push(int x) {
