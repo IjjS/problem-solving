@@ -2,7 +2,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
         Reader reader = new Reader();
 
-        // n
+        // n, m
         int n = reader.nextInt();
         int m = reader.nextInt();
 
@@ -10,7 +10,6 @@ public class Main {
         int[] sum = new int[n + 2];
 
         sum[0] = 0;
-        sum[n] = 0;
 
         for (int i = 1; i <= n; i++) {
             sum[i] = sum[i - 1] + reader.nextInt();
