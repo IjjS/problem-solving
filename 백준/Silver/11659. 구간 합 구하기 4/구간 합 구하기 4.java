@@ -8,14 +8,11 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         // n, m
-        String counts = br.readLine();
-        StringTokenizer st = new StringTokenizer(counts);
-        int n = Integer.parseInt(st.nextToken());
-        int m = Integer.parseInt(st.nextToken());
+        int n = Integer.parseInt(br.readLine().split(" ")[0]);
 
         // n numbers & 구간 합 배열 생성
         String inputs = br.readLine();
-        st = new StringTokenizer(inputs);
+        StringTokenizer st = new StringTokenizer(inputs);
         int[] sum = new int[n + 2];
 
         sum[0] = 0;
@@ -26,9 +23,9 @@ public class Main {
         }
 
         // 구간 합 출력
-        for (int i = 1; i <= m; i++) {
-             String bounds = br.readLine();
-             st = new StringTokenizer(bounds);
+        String str;
+        while((str = br.readLine()) != null) {
+             st = new StringTokenizer(str);
              int lowerBound = Integer.parseInt(st.nextToken()) - 1;
              int upperBound = Integer.parseInt(st.nextToken());
 
