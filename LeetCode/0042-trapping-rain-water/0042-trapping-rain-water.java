@@ -1,21 +1,27 @@
 class Solution {
     public int trap(int[] height) {
-        int left = 0;
-        int right = height.length - 1;
-        int leftMax = height[left];
-        int rightMax = height[right];
+        Deque<Integer> stack = new ArrayDeque<>();
         int answer = 0;
         
-        while (left < right) {
-            if (leftMax < rightMax) {
-                left++;
-                leftMax = Math.max(leftMax, height[left]);
-                answer += (leftMax - height[left]);
-            } else {
-                right--;
-                rightMax = Math.max(rightMax, height[right]);
-                answer += (rightMax - height[right]);
+        for (int i = 0; i < height.length; i++) {
+            //facing inflection
+            while (!stack.isEmpty() && height[i] > height[stack.peek()]) {
+                //store the last
+                int last = stack.pop();
+                
+                if (stack.isEmpty()) continue;
+                
+                //distance between current and last stack (+1 for pop above)
+                int distance = i - (stack.peek() + 1);
+                
+                //last inflection can be higher, so get the min height
+                int h = Math.min(height[i], height[stack.peek()]) - height[last];
+                
+                //a = h*d;
+                answer += distance * h;
             }
+            
+            stack.push(i);
         }
         
         return answer;
