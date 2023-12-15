@@ -5,28 +5,24 @@ class MyCircularQueue(k: Int) {
     var len = 0
 
     fun enQueue(value: Int): Boolean {
-        if (!isFull()) {
-            rear = ++rear % q.size
-            q[rear] = value
-            
-            len++
-            
-            return true
-        }
+        if (isFull()) return false 
         
-        return false
+        rear = ++rear % q.size
+        q[rear] = value
+            
+        len++
+        
+        return true
     }
 
     fun deQueue(): Boolean {
-        if (!isEmpty()) {
-            front = ++front % q.size
-            
-            len--
-            
-            return true
-        }
+        if (isEmpty()) return false
         
-        return false
+        front = ++front % q.size
+            
+        len--
+            
+        return true
     }
 
     fun Front(): Int {
