@@ -37,7 +37,7 @@ class Solution {
         var prev: ListNode? = null
         var node: ListNode? = null
         
-        for (c in "$value".toCharArray()) {
+        for (c in "$value") {
             node = ListNode(Character.getNumericValue(c))
             node.next = prev
             prev = node
