@@ -10,9 +10,7 @@ class Solution {
         ListNode end = root;
         
         for (ListNode list : lists) {
-            if (list == null) continue;
-            
-            pq.add(list);
+            if (list != null) pq.add(list);
         }
         
         while (!pq.isEmpty()) {
