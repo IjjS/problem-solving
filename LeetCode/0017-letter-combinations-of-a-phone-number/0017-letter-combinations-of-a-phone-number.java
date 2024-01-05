@@ -5,24 +5,22 @@ class Solution {
         
         if (digits.length() == 0) return result;
         
-        Map<Character, List<Character>> dict = new HashMap<>();
+        Map<Character, Character[]> dict = new HashMap<>();
         
-        dict.put('0', Collections.emptyList());
-        dict.put('1', Collections.emptyList());
-        dict.put('2', List.of('a', 'b', 'c'));
-        dict.put('3', List.of('d', 'e', 'f'));
-        dict.put('4', List.of('g', 'h', 'i'));
-        dict.put('5', List.of('j', 'k', 'l'));
-        dict.put('6', List.of('m', 'n', 'o'));
-        dict.put('7', List.of('p', 'q', 'r', 's'));
-        dict.put('8', List.of('t', 'u', 'v'));
-        dict.put('9', List.of('w', 'x', 'y', 'z'));
+        dict.put('2', new Character[]{'a', 'b', 'c'});
+        dict.put('3', new Character[]{'d', 'e', 'f'});
+        dict.put('4', new Character[]{'g', 'h', 'i'});
+        dict.put('5', new Character[]{'j', 'k', 'l'});
+        dict.put('6', new Character[]{'m', 'n', 'o'});
+        dict.put('7', new Character[]{'p', 'q', 'r', 's'});
+        dict.put('8', new Character[]{'t', 'u', 'v'});
+        dict.put('9', new Character[]{'w', 'x', 'y', 'z'});
         dfs(result, dict, digits, 0, new StringBuilder());
         
         return result;
     }
     
-    void dfs(List<String> result, Map<Character, List<Character>> dict, String digits, int index, StringBuilder path) {
+    void dfs(List<String> result, Map<Character, Character[]> dict, String digits, int index, StringBuilder path) {
         if (path.length() == digits.length()) {
             result.add(String.valueOf(path));
             return;
