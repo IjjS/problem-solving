@@ -1,22 +1,19 @@
 class MyQueue {
     
-    Stack<Integer> main = new Stack<>();
-    Stack<Integer> temp = new Stack<>();
+    Deque<Integer> main;
+    Deque<Integer> temp;
 
     public MyQueue() {
-        
+        main = new ArrayDeque<>();
+        temp = new ArrayDeque<>();
     }
     
     public void push(int x) {
-        while (!main.empty()) {
-            temp.push(main.pop());
-        }
+        while(!main.isEmpty()) temp.push(main.pop());
         
-        temp.push(x);
+        main.push(x);
         
-        while (!temp.empty()) {
-            main.push(temp.pop());
-        }
+        while(!temp.isEmpty()) main.push(temp.pop());
     }
     
     public int pop() {
@@ -28,6 +25,6 @@ class MyQueue {
     }
     
     public boolean empty() {
-        return main.empty();
+        return main.isEmpty();
     }
 }
