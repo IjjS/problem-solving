@@ -1,36 +1,29 @@
 class MyCircularDeque {
-    static class DoubleNode {
-        DoubleNode prev;
-        DoubleNode next;
-        int val;
-        
-        DoubleNode(int val) {
-            this.val = val;
-        }
-    }
-    
-    DoubleNode head = new DoubleNode(0);
-    DoubleNode tail = new DoubleNode(0);
-    int len = 0;
-    int max = 0;
+    Node head;
+    Node tail;
+    int size;
+    int max;
 
     public MyCircularDeque(int k) {
-        max = k;
+        head = new Node(0);
+        tail = new Node(0);
         head.next = tail;
         tail.prev = head;
+        size = 0;
+        max = k;
     }
     
     public boolean insertFront(int value) {
         if (isFull()) return false;
         
-        DoubleNode node = new DoubleNode(value);
+        Node node = new Node(value);
         
-        node.next = head.next;
         node.prev = head;
+        node.next = head.next;
         head.next.prev = node;
         head.next = node;
         
-        len++;
+        size++;
         
         return true;
     }
@@ -38,25 +31,25 @@ class MyCircularDeque {
     public boolean insertLast(int value) {
         if (isFull()) return false;
         
-        DoubleNode node = new DoubleNode(value);
+        Node node = new Node(value);
         
-        node.prev = tail.prev;
         node.next = tail;
+        node.prev = tail.prev;
         tail.prev.next = node;
         tail.prev = node;
         
-        len++;
+        size++;
         
         return true;
     }
     
     public boolean deleteFront() {
         if (isEmpty()) return false;
-        
-        head.next.next.prev = head;
+
         head.next = head.next.next;
+        head.next.prev = head;
         
-        len--;
+        size--;
         
         return true;
     }
@@ -64,27 +57,39 @@ class MyCircularDeque {
     public boolean deleteLast() {
         if (isEmpty()) return false;
         
-        tail.prev.prev.next = tail;
         tail.prev = tail.prev.prev;
+        tail.prev.next = tail;
         
-        len--;
+        size--;
         
         return true;
     }
     
     public int getFront() {
-        return (isEmpty()) ? -1 : head.next.val;
+        return head.next == tail ? -1 : head.next.value;
     }
     
     public int getRear() {
-        return (isEmpty()) ? -1 : tail.prev.val;
+        return tail.prev == head ? -1 : tail.prev.value;
     }
     
     public boolean isEmpty() {
-        return len == 0;
+        return head.next == tail;
     }
     
     public boolean isFull() {
-        return len == max;
+        return size == max;
+    }
+    
+    static class Node {
+        Node prev;
+        Node next;
+        int value;
+        
+        Node(int value) {
+            this.value = value;
+            prev = null;
+            next = null;
+        }
     }
 }
