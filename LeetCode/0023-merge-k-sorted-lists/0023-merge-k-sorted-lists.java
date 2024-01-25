@@ -1,23 +1,21 @@
 class Solution {
     public ListNode mergeKLists(ListNode[] lists) {
-        PriorityQueue<ListNode> pq = new PriorityQueue<>((n1, n2) -> {
-            if (n1.val == n2.val) return 0;
-            if (n1.val > n2.val) return 1;
-            else return -1;
-        });
+        if (lists.length == 0) return null;
         
-        ListNode root = new ListNode(0);
-        ListNode end = root;
+        Queue<ListNode> pq = new PriorityQueue<>((a, b) -> a.val - b.val);
         
-        for (ListNode list : lists) {
-            if (list != null) pq.add(list);
+        for (ListNode node : lists) {
+            if (Objects.nonNull(node)) pq.offer(node);
         }
         
+        ListNode root = new ListNode(0);
+        ListNode current = root;
+        
         while (!pq.isEmpty()) {
-            end.next = pq.poll();
-            end = end.next;
+            current.next = pq.poll();
+            current = current.next;
             
-            if (end.next != null) pq.add(end.next);
+            if (Objects.nonNull(current.next)) pq.offer(current.next);
         }
         
         return root.next;
