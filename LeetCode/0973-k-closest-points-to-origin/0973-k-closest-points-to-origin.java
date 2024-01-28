@@ -1,27 +1,26 @@
 class Solution {
-    static class Point {
-        long distance;
-        int[] coords;
+    public int[][] kClosest(int[][] points, int k) {
+        Queue<Point> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a.distance));
+        int[][] answer = new int[k][2];
         
-        public Point(long distance, int[] coords) {
-            this.distance = distance;
-            this.coords = coords;
-        }
+        for (int[] point : points) pq.offer(new Point(point));
+        
+        for (int i = 0; i < k; i++) answer[i] = pq.poll().coordinates;
+        
+        return answer;
     }
     
-    public int[][] kClosest(int[][] points, int k) {
-        PriorityQueue<Point> pq = new PriorityQueue<>(Comparator.comparingLong(a -> a.distance));
+    static class Point {
         
-        for (int[] point : points) {
-            long distance = ((long) point[0] * point[0]) + ((long) point[1] * point[1]);
-            
-            pq.add(new Point(distance, point));
+        int[] coordinates;
+        int distance;
+        
+        Point(int[] coordinates) {
+            this.coordinates = coordinates;
+            int x = coordinates[0];
+            int y = coordinates[1];
+            distance = x * x + y * y;
         }
         
-        int[][] results = new int[k][];
-        
-        for (int i = 0; i < k; i++) results[i] = pq.poll().coords;
-        
-        return results;
     }
 }
