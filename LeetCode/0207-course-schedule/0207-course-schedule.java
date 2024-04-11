@@ -1,8 +1,8 @@
 class Solution {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
         Map<Integer, List<Integer>> guides = new HashMap<>();
-        List<Integer> regulars = new ArrayList<>();
-        Set<Integer> checked = new HashSet<>();
+        boolean[] regulars = new boolean[numCourses];
+        boolean[] checked = new boolean[numCourses];
         
         for (int[] prerequisite: prerequisites) {
             guides.computeIfAbsent(prerequisite[0], reg -> new ArrayList<>())
@@ -18,22 +18,22 @@ class Solution {
         return true;
     }
     
-    private boolean dfs(Map<Integer, List<Integer>> guides, int prerequisite, List<Integer> regulars, Set<Integer> checked) {
-        if (regulars.contains(prerequisite)) {
+    private boolean dfs(Map<Integer, List<Integer>> guides, int prerequisite, boolean[] regulars, boolean[] checked) {
+        if (regulars[prerequisite]) {
             return false;
         }
         
-        if (checked.contains(prerequisite)) {
+        if (checked[prerequisite]) {
             return true;
         }
         
-        checked.add(prerequisite);
+        checked[prerequisite] = true;
         
         if (!guides.containsKey(prerequisite)) {
             return true;
         }
         
-        regulars.add(prerequisite);
+        regulars[prerequisite] = true;
         
         for (int regular : guides.get(prerequisite)) {
             if (!dfs(guides, regular, regulars, checked)) {
@@ -41,7 +41,7 @@ class Solution {
             }
         }
         
-        regulars.removeLast();
+        regulars[prerequisite] = false;
         
         return true;
     }
