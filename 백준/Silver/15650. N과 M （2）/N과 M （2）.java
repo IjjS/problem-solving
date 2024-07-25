@@ -8,13 +8,13 @@ public class Main {
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		int n = Integer.parseInt(st.nextToken());
 		int m = Integer.parseInt(st.nextToken());
-		int[] nums = new int[n];
+		int[] nums = new int[m];
 		boolean[] visited = new boolean[n + 1];
 	
-		backTrack(n, m, nums, visited, 0);
+		backTrack(n, m, nums, visited, 0, 0);
 	}
 	
-	static void backTrack(int n, int m, int[] nums, boolean[] visited, int current) {
+	static void backTrack(int n, int m, int[] nums, boolean[] visited, int current, int index) {
 		if (current == m) {
 			StringBuilder sb = new StringBuilder();
 			
@@ -28,15 +28,15 @@ public class Main {
 			return;
 		}
 		
-		for (int i = 1; i <= n; i++) {
-			if (current != 0 && nums[current - 1] >= i || visited[i]) {
+		for (int i = index + 1; i <= n; i++) {
+			if (visited[i]) {
 				continue;
 			}
 			
 			visited[i] = true;
 			nums[current] = i;
 			
-			backTrack(n, m, nums, visited, current + 1);
+			backTrack(n, m, nums, visited, current + 1, i);
 			
 			visited[i] = false;
 		}
