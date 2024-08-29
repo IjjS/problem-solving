@@ -1,28 +1,29 @@
 import java.util.Scanner;
 
-class Solution {
-	
-	static final int cases = 10;
+public class Solution {
+    
+    static final int cases = 10;
 	
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		
 		for (int t = 1; t <= cases; t++) {
 			int tc = sc.nextInt();
-			int base = sc.nextInt();
-			int exp = sc.nextInt();
-			int powered = pow(base, exp, 1);
+			int n = sc.nextInt();
+			int m = sc.nextInt();
+            int answer = 1;
 			
-			System.out.println("#" + tc + " " + powered);
+			while (m > 0) {
+				if ((m & 1) == 1) {
+					answer *= n;
+				}
+				
+				n *= n;
+				m >>= 1;
+			}
+			
+			System.out.println("#" + tc + " " + answer);
 		}
-	}
-	
-	static int pow(int base, int exp, int count) {
-		if (count == exp + 1) {
-			return 1;
-		}
-		
-		return base * pow(base, exp, count + 1);
 	}
 	
 }
